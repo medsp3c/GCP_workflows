@@ -1,0 +1,13 @@
+main:
+    params: [input]
+    steps:
+    - startManualRuns:
+        call: googleapis.bigquerydatatransfer.v1.projects.locations.transferConfigs.startManualRuns
+        args:
+            parent: ##transfer config identifier##
+            body:
+                requestedRunTime: ${time.format(sys.now())}
+        result: run_result
+
+    - returnOutput:
+            return: '${run_result}'
